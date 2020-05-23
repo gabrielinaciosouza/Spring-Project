@@ -13,6 +13,7 @@ import com.gabriel.projetospring.domain.Cidade;
 import com.gabriel.projetospring.domain.Cliente;
 import com.gabriel.projetospring.domain.Endereco;
 import com.gabriel.projetospring.domain.Estado;
+import com.gabriel.projetospring.domain.ItemPedido;
 import com.gabriel.projetospring.domain.Pagamento;
 import com.gabriel.projetospring.domain.PagamentoComBoleto;
 import com.gabriel.projetospring.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.gabriel.projetospring.repositories.CidadeRepository;
 import com.gabriel.projetospring.repositories.ClienteRepository;
 import com.gabriel.projetospring.repositories.EnderecoRepository;
 import com.gabriel.projetospring.repositories.EstadoRepository;
+import com.gabriel.projetospring.repositories.ItemPedidoRepository;
 import com.gabriel.projetospring.repositories.PagamentoRepository;
 import com.gabriel.projetospring.repositories.PedidoRepository;
 import com.gabriel.projetospring.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ public class ProjetospringApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetospringApplication.class, args);
@@ -113,7 +117,20 @@ public class ProjetospringApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgto1,pgto2));
-
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
+		
 	}
 
 }
