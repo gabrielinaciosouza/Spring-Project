@@ -1,10 +1,9 @@
 package com.gabriel.projetospring.domain.enums;
 
 public enum EstadoPagamento {
-	
-	
-	PENDENTE(1, "Pendente"), QUITADO(2, "Quitado"), CANCELADO(3,"Cancelado");
-	
+
+	PENDENTE(1, "Pendente"), QUITADO(2, "Quitado"), CANCELADO(3, "Cancelado");
+
 	private int cod;
 	private String descricao;
 
@@ -22,13 +21,13 @@ public enum EstadoPagamento {
 		return descricao;
 
 	}
-	
+
 	public static EstadoPagamento toEnum(Integer id) {
-		if (id==null) {
+		if (id == null) {
 			return null;
 		}
-		for(EstadoPagamento x : EstadoPagamento.values()) {
-			if(id.equals(x.getCod())) {
+		for (EstadoPagamento x : EstadoPagamento.values()) {
+			if (id.equals(x.getCod())) {
 				return x;
 			}
 		}
