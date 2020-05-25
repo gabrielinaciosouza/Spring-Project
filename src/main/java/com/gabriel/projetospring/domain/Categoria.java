@@ -32,7 +32,7 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Produto> getProduto() {
+	public List<Produto> getProdutos() {
 		return produto;
 	}
 
